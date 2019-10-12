@@ -1,0 +1,69 @@
+<html>
+
+<head>
+  <title>Order Tracking</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+      <div class="jumbotron">
+        <a href="/track" class="btn btn-primary">Back</a>
+        <h4>Tracking ID: <%=data.tracking.tracking_number%></h4>
+        <p><strong>Status:</strong> <%=data.tracking.tag%> &nbsp;| <%=data.tracking.subtag_message%></p>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+            <h3>Order Details</h3>
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Date</th>
+                      <th scope="col">Courier</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Event</th>
+                    </tr>
+                  </thead>
+                  <% if(data.tracking.checkpoints){ %>
+                  <tbody>
+                      <% data.tracking.checkpoints.forEach(function(checkpoints) { %>
+                          <tr>
+                              <td><%=moment(checkpoints.created_at).format( 'LLLL')%></td>
+                              <td><%=checkpoints.slug%></td>
+                              <td><%=checkpoints.tag%></td>
+                              <td><%=checkpoints.message%> &nbsp;|<br /> <%=checkpoints.location%></td>
+                          </tr>
+                      <% }); %>
+                  </tbody>
+                  <% } %>
+                </table>
+          </div>
+        <div class="col-md-4">
+          <h3>Order</h3>
+          <ul class="list-group">
+            <li class="list-group-item">Title: <%=data.tracking.title%></li>
+            <li class="list-group-item">Shipping Type: <%=data.tracking.shipment_type%></li>
+            <li class="list-group-item">Shipping Weight: <%=data.tracking.shipment_weight%></li>
+            <li class="list-group-item">Shipping Unit: <%=data.tracking.shipment_weight_unit%></li>
+            <li class="list-group-item">Shipping Signed by: <%=data.tracking.signed_by%></li>
+            <li class="list-group-item">Shipping Signed by: <%=data.tracking.signed_by%></li>
+  
+            <li class="list-group-item">Delivered date: <%=moment(data.tracking.shipment_delivery_date).format( 'LLLL')%></li>
+            <li class="list-group-item">Pickup date: <%=moment(data.tracking.shipment_pickup_date).format( 'LLLL')%></li>
+  
+            <li class="list-group-item">Transit time: <%=data.tracking.delivery_time%> Days</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</html>
